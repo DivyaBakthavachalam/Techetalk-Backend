@@ -1,9 +1,12 @@
 package com.techetalk.app.service;
 
-import com.techetalk.app.model.Users;
+import java.util.List;
+
+import com.techetalk.app.model.User;
 
 
 public interface UserService {
 
-	Users findById(int id);
+	User findById(int id);
+	public List<User> findAll();
 }

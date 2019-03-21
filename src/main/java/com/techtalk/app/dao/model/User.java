@@ -1,4 +1,4 @@
-package com.techtalk.app.dao.model;
+/*package com.techtalk.app.dao.model;
 
 import java.sql.Date;
 
@@ -64,3 +64,4 @@ public class User {
 	
 	
 }
+*/

@@ -1,23 +1,21 @@
-package com.techetalk.app.config;
-
-import java.util.Properties;
+/*package com.techetalk.app.config;
 
 import javax.sql.DataSource;
-import org.hibernate.ejb.HibernatePersistence;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceBuilder;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
-import org.springframework.jdbc.datasource.DriverManagerDataSource;
-import org.springframework.orm.jpa.JpaTransactionManager;
-import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
-@EnableTransactionManagement
-@EnableJpaRepositories("com.techetalk.app.dao.repository")
+//@EnableTransactionManagement
+//@EnableJpaRepositories("com.techetalk.app.dao.repository")
 @PropertySource("classpath:application.properties")
 public class DataConfig {
 
@@ -32,36 +30,15 @@ public class DataConfig {
 	Environment environment;
 
 	@Bean
-	LocalContainerEntityManagerFactoryBean entityManagerFactory() {
-		LocalContainerEntityManagerFactoryBean lfb = new LocalContainerEntityManagerFactoryBean();
-		lfb.setDataSource(dataSource());
-		lfb.setPersistenceProviderClass(HibernatePersistence.class);
-		lfb.setPackagesToScan("com.techtalk.app.dao.model");
-		lfb.setJpaProperties(hibernateProps());
-		return lfb;
+	@Primary
+	@ConfigurationProperties(prefix="spring.datasource")
+	public DataSource primaryDataSource() {
+	    return DataSourceBuilder.create().build();
 	}
 
 	@Bean
-	DataSource dataSource() {
-		DriverManagerDataSource ds = new DriverManagerDataSource();
-		ds.setUrl(environment.getProperty(PROPERTY_URL));
-		ds.setUsername(environment.getProperty(PROPERTY_USERNAME));
-		ds.setPassword(environment.getProperty(PROPERTY_PASSWORD));
-		ds.setDriverClassName(environment.getProperty(PROPERTY_DRIVER));
-		return ds;
+	@ConfigurationProperties(prefix="spring.secondDatasource")
+	public DataSource secondaryDataSource() {
+	    return DataSourceBuilder.create().build();
 	}
-
-	Properties hibernateProps() {
-		Properties properties = new Properties();
-		properties.setProperty(PROPERTY_DIALECT, environment.getProperty(PROPERTY_DIALECT));
-		properties.setProperty(PROPERTY_SHOW_SQL, environment.getProperty(PROPERTY_SHOW_SQL));
-		return properties;
-	}
-
-	@Bean
-	JpaTransactionManager transactionManager() {
-		JpaTransactionManager transactionManager = new JpaTransactionManager();
-		transactionManager.setEntityManagerFactory(entityManagerFactory().getObject());
-		return transactionManager;
-	}
-}
+}*/

@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.springframework.data.repository.CrudRepository;
 
-import com.techtalk.app.dao.model.User;
+import com.techetalk.app.model.User;
 
 
 public interface UserRepository<U> extends CrudRepository<User, Long>{
