@@ -21,7 +21,7 @@ public class QuestionServiceImpl {
 	@Autowired
 	UserRepository<UserDao> userRepository;
 	@Transactional
-	public List<QuestionsDao> getAllUsers() {
+	public List<QuestionsDao> getAllQuestions() {
 		return (List<QuestionsDao>) questionRepository.findAll();
 	}
 	

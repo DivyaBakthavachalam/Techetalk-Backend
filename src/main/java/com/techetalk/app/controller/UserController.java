@@ -3,7 +3,6 @@ package com.techetalk.app.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -11,8 +10,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.techetalk.app.dao.model.QuestionsDao;
 import com.techetalk.app.dao.model.UserDao;
+import com.techetalk.app.model.Answer;
 import com.techetalk.app.model.Questions;
 import com.techetalk.app.model.User;
+import com.techetalk.app.service.AnswerServiceImpl;
 import com.techetalk.app.service.QuestionServiceImpl;
 import com.techetalk.app.service.UserServiceImpl;
 
@@ -29,6 +30,9 @@ public class UserController {
 	@Autowired
 	private QuestionServiceImpl questionService;
 
+	@Autowired
+	private AnswerServiceImpl answerService;
+	
 	@RequestMapping("/")
 	public List getUsers() {
 		List<UserDao> users = userService.getAllUsers();
@@ -38,12 +42,12 @@ public class UserController {
 	
 	@RequestMapping("/getquestions")
 	public List getQuestions() {
-		List<QuestionsDao> question = questionService.getAllUsers();
+		List<QuestionsDao> question = questionService.getAllQuestions();
 		System.out.println(question.toString());
 		return question;
 	}
 
-	@PostMapping(path = "/saveuser", consumes = "application/json", produces = "application/json")
+	@RequestMapping(path = "/saveuser", method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
 	public void saveUsers(@RequestBody User user) {
 		System.out.println("inside save");
 		// User saveUser = new
@@ -57,5 +61,10 @@ public class UserController {
 	public void saveQuestions(@RequestBody Questions question) {
 		 questionService.saveQuestion(question);
 		System.out.println(question.toString());
+	}
+	@RequestMapping(value="/saveanswer", method = RequestMethod.POST,consumes = "application/json", produces = "application/json")
+	public void saveAnswers(@RequestBody Answer answer) {
+		answerService.saveAnswer(answer);;
+		System.out.println(answer.toString());
 	}
 }
