@@ -4,10 +4,10 @@ import java.util.List;
 
 import org.springframework.data.repository.CrudRepository;
 
-import com.techetalk.app.model.User;
+import com.techetalk.app.dao.model.UserDao;
 
 
-public interface UserRepository<U> extends CrudRepository<User, Long>{
-	List<User> findByName(String name);
+public interface UserRepository<U> extends CrudRepository<UserDao, Long>{
+	List<UserDao> findByName(String name);
 	//void saveUser(User user);
 }

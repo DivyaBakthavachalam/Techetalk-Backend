@@ -8,6 +8,7 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.techetalk.app.dao.model.UserDao;
 import com.techetalk.app.dao.repository.UserRepository;
 import com.techetalk.app.model.User;
 
@@ -18,14 +19,14 @@ public class UserServiceImpl {
 	private static final AtomicLong counter = new AtomicLong();
 
 	@Transactional
-	public List<User> getAllUsers() {
-		return (List<User>) userRepository.findAll();
+	public List<UserDao> getAllUsers() {
+		return (List<UserDao>) userRepository.findAll();
 	}
 
-	@Transactional
+	/*@Transactional
 	public boolean saveUser(User user) {
 		user.setId(counter.incrementAndGet());
 		return userRepository.save(user) != null;
-	}
+	}*/
 
 }
